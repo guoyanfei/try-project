@@ -20,7 +20,6 @@ public class DemoService {
     }
 
     public DemoService(String content) {
-
         this.content = content;
     }
 }
