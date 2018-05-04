@@ -1,9 +1,6 @@
 package com.guo.code.testtool;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.text.DecimalFormat;
 
 /**
  * Created by gyf .
@@ -12,32 +9,39 @@ import java.util.List;
 public class TestMyString {
 
     public static void main(String[] args) {
-        String appTag = "美食,服装,学校,班级,姓名";
+        TestMyString test = new TestMyString();
+        double[] aaa = new double[2];
+        aaa[0] = 0.0;
+        aaa[1] = 0.0;
 
-        List<String> pcgs = new ArrayList<>();
-        String pcg1 = "美食,上街";
-        String pcg2 = "好吃的,上街";
-        String pcg3 = "服装,学校";
-        String pcg4 = "我干";
-        pcgs.add(pcg1);
-        pcgs.add(pcg2);
-        pcgs.add(pcg3);
-        pcgs.add(pcg4);
+        System.out.println(1 - aaa[1] / aaa[0]);
+        if (1 - aaa[1] / aaa[0] < 30 / 100) {
+            System.out.println("你真帅");
+        }
+        System.out.println(test.convertPercentsToString(test.buildFlucDescPers(aaa)));
+    }
+    protected DecimalFormat m_df = new DecimalFormat("0.###");
 
-        List<String> tags = Arrays.asList(appTag.split(","));
 
-        Iterator<String> iterator = pcgs.iterator();
-        while (iterator.hasNext()) {
-            String it = iterator.next();
-            List<String> temp = new ArrayList<>(Arrays.asList(it.split(",")));
-            temp.retainAll(tags);
-            if (!temp.isEmpty()) {
-                iterator.remove();
-            }
+    private double[] buildFlucDescPers(double[] values) {
+        int length = values.length;
+        double[] descPers = new double[length - 1];
+        double baseVal = values[length - 1];
+
+        for (int i = 0; i <= length - 2; i++) {
+            descPers[i] = (1 - baseVal / values[i]) * 100;
         }
 
-        for (String it : pcgs) {
-            System.out.println(it);
+        return descPers;
+    }
+
+    protected String convertPercentsToString(double[] values) {
+        StringBuilder builder = new StringBuilder();
+
+        for (double value : values) {
+            builder.append(m_df.format(value)).append("% ");
         }
+
+        return builder.toString();
     }
 }
