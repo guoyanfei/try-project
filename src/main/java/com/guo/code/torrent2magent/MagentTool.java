@@ -15,7 +15,7 @@ public class MagentTool {
     public static void main(String[] args) throws Exception {
         MagentTool tool = new MagentTool();
         List<String> result = new ArrayList<>();
-        List<String> result2 = tool.traverseFolder2("/Users/gyf/Downloads/resources/seeds/seeds", result);
+        List<String> result2 = tool.traverseFolder2("/Users/guoyanfei/Downloads/seeds", result);
         for (String it : result2) {
 //            System.out.println(it);
             System.out.println(tool.getMagent(it));
